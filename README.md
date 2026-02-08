@@ -1,20 +1,44 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# PrintOps-NOC
 
-# Run and deploy your AI Studio app
+## 🖨️ Printer Monitoring & Consumables Inventory Dashboard
 
-This contains everything you need to run your app locally.
+Este proyecto implementa una plataforma de **monitoreo de impresoras y gestión de consumibles** orientada a entornos corporativos y de IT, combinando **scraping automatizado**, **inventario estructurado** y **visualización tipo dashboard**.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1EAfED8EdVRxHSJzDAdfEJbY6F9aXWSM-
+La solución permite centralizar información crítica como el estado de las impresoras, niveles de tinta y tóner, inventario disponible, criticidad por modelo y ubicación, y soporte para múltiples marcas y tecnologías (HP, Konica Minolta, Toshiba, entre otras).
 
-## Run Locally
+### 🚀 Características principales
 
-**Prerequisites:**  Node.js
+* Monitoreo automático de impresoras en red (ping + scraping web)
+* Obtención de niveles de tinta/tóner por color (CMYK)
+* Inventario detallado de consumibles (41+ ítems reales)
+* Cache inteligente y persistencia en JSON
+* Agrupación por modelo de impresora y referencia de consumible
+* Indicadores de riesgo por stock mínimo
+* Soporte para auto-login en impresoras con autenticación (ej. Konica)
+* Escaneos programados vía cron
+* Backend preparado para dashboards de IT y observabilidad
+* Arquitectura extensible por scraper/modelo
 
+### 🧱 Arquitectura
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+* **Backend:** Node.js + Express
+* **Automatización:** Puppeteer
+* **Persistencia:** JSON estructurado
+* **Vista:** EJS (dashboard)
+* **Scheduling:** node-cron
+* **Red:** Ping ICMP para disponibilidad
+
+### 📊 Casos de uso
+
+* Prevención de quiebres de stock de consumibles
+* Visibilidad centralizada de impresión corporativa
+* Soporte IT proactivo
+* Planeación de compras y reposición
+* Auditoría de impresión por ubicación y modelo
+
+### 🧠 Filosofía del proyecto
+
+> “No solo saber si una impresora imprime hoy,  
+> sino si podrá seguir imprimiendo mañana.”
+
+El proyecto prioriza **datos accionables**, **automatización confiable** y una **experiencia de dashboard profesional**, alineada con prácticas de IT moderno.

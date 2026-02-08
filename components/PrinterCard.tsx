@@ -46,23 +46,25 @@ const PrinterCard: React.FC<PrinterCardProps> = ({ printer }) => {
         
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start">
-            <h3 className="font-bold text-white text-sm tracking-tight truncate pr-2" title={printer.name}>
-              {printer.name}
-            </h3>
+            <div className="min-w-0">
+              <h3 className="font-bold text-white text-sm tracking-tight truncate pr-2" title={printer.name}>
+                {printer.name}
+              </h3>
+              {printer.lastUpdated && (
+                <span className="inline-block mt-0.5 text-[10px] text-secondary bg-background/60 border border-border rounded px-2 py-0.5 font-mono" title="Última actualización">
+                  <Clock size={9} className="inline mr-1" />
+                  {formatDate(printer.lastUpdated)}
+                </span>
+              )}
+            </div>
             <button className="text-secondary hover:text-white transition-colors">
               <MoreHorizontal size={16} />
             </button>
           </div>
-          
           <div className="mt-1 flex flex-col gap-0.5">
             <a href={`http://${printer.ip}`} target="_blank" rel="noopener noreferrer" className="text-[11px] text-primary hover:text-primary/80 hover:underline font-mono truncate">
               {printer.ip}
             </a>
-            {printer.lastUpdated && (
-              <span className="text-[10px] text-secondary flex items-center gap-1">
-                <Clock size={10} /> {formatDate(printer.lastUpdated)}
-              </span>
-            )}
           </div>
         </div>
       </div>
