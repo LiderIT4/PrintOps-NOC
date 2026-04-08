@@ -1,0 +1,31 @@
+{
+  "name": "inklevel-dashboard-copy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiderIT4/ink-level-dashboard.git"
+  },
+  "keywords": [],
+  "author": "John R",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiderIT4/ink-level-dashboard/issues"
+  },
+  "homepage": "https://github.com/LiderIT4/ink-level-dashboard#readme",
+  "description": "inklevel net printers scrapping",
+  "dependencies": {
+    "express": "^5.2.1",
+    "net-snmp": "^3.26.1",
+    "ping": "^1.0.0",
+    "puppeteer": "^24.39.1",
+    "random-useragent": "^0.5.0"
+  }
+}

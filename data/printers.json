@@ -1,0 +1,212 @@
+{
+  "Pastor": {
+    "timestamp": "2026-04-08T16:33:00.944Z",
+    "name": "Pastor",
+    "ip": "172.16.11.231",
+    "status": "online",
+    "inkLevels": [
+      "cyan: 59%",
+      "magenta: 46%",
+      "yellow: 84%",
+      "black: 47%",
+      "Pages: 24921",
+      "BW Pages: 18961",
+      "Color Pages: 5905"
+    ]
+  },
+  "SPP": {
+    "timestamp": "2026-04-08T16:32:34.275Z",
+    "name": "SPP",
+    "ip": "172.16.111.2",
+    "status": "online",
+    "inkLevels": [
+      "cyan: 0%",
+      "magenta: 29%",
+      "yellow: 73%",
+      "black: 69%",
+      "Pages: 51681",
+      "BW Pages: 50521",
+      "Color Pages: 1143"
+    ]
+  },
+  "Mantenimiento": {
+    "timestamp": "2026-04-08T16:32:25.499Z",
+    "name": "Mantenimiento",
+    "ip": "172.16.111.110",
+    "status": "online",
+    "inkLevels": [
+      "cyan: 35%",
+      "magenta: 22%",
+      "yellow: 32%",
+      "black: 96%",
+      "Pages: 60438",
+      "BW Pages: 54075",
+      "Color Pages: 6351"
+    ]
+  },
+  "Cooperativa": {
+    "timestamp": "2026-04-08T16:33:09.906Z",
+    "name": "Cooperativa",
+    "ip": "172.16.11.172",
+    "status": "online",
+    "inkLevels": [
+      "cyan: 74%",
+      "magenta: 67%",
+      "yellow: 93%",
+      "black: 35%",
+      "Pages: 82380",
+      "BW Pages: 69725",
+      "Color Pages: 12651"
+    ]
+  },
+  "Radio": {
+    "timestamp": "2026-04-08T16:02:57.074Z",
+    "name": "Radio",
+    "ip": "172.16.117.127",
+    "status": "online",
+    "inkLevels": [
+      "color: 20%",
+      "black: 60%",
+      "Pages: 21667",
+      "BW Pages: 8025",
+      "Color Pages: 13642"
+    ]
+  },
+  "Eventos Gerizim": {
+    "timestamp": "2026-04-08T16:31:48.566Z",
+    "name": "Eventos Gerizim",
+    "ip": "172.16.111.127",
+    "status": "online",
+    "inkLevels": [
+      "color: 20%",
+      "black: 60%",
+      "Pages: 17428",
+      "BW Pages: 12449",
+      "Color Pages: 4979"
+    ]
+  },
+  "Estudio Grabación": {
+    "timestamp": "2026-04-08T16:32:16.106Z",
+    "name": "Estudio Grabación",
+    "ip": "172.16.17.40",
+    "status": "online",
+    "inkLevels": [
+      "black: 0%"
+    ]
+  },
+  "Bodega Coffee": {
+    "timestamp": "2026-04-08T16:38:45.014Z",
+    "name": "Bodega Coffee",
+    "ip": "172.16.113.14",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 100%",
+      "magenta: 100%",
+      "cyan: 100%",
+      "black: 100%"
+    ]
+  },
+  "Producción Piso 3": {
+    "timestamp": "2026-04-08T16:30:00.667Z",
+    "name": "Producción Piso 3",
+    "ip": "172.16.17.5",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 30%",
+      "magenta: 26%",
+      "cyan: 36%",
+      "black: 72%"
+    ]
+  },
+  "Konica": {
+    "timestamp": "2026-04-08T16:37:03.049Z",
+    "name": "Konica",
+    "ip": "172.16.17.45",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 74%",
+      "magenta: 65%",
+      "cyan: 51%",
+      "black: 15%"
+    ]
+  },
+  "Cocina piso 7": {
+    "timestamp": "2026-04-08T16:36:53.172Z",
+    "name": "Cocina piso 7",
+    "ip": "172.16.111.59",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 100%",
+      "magenta: 100%",
+      "cyan: 100%",
+      "black: 100%"
+    ]
+  },
+  "Factura Electrónica": {
+    "timestamp": "2026-04-08T16:32:07.780Z",
+    "name": "Factura Electrónica",
+    "ip": "172.16.111.25",
+    "status": "online",
+    "inkLevels": [
+      "color: 40%",
+      "black: 60%",
+      "Pages: 18440",
+      "BW Pages: 12057",
+      "Color Pages: 6383"
+    ]
+  },
+  "Toshiba Administrativa": {
+    "timestamp": "2026-04-08T16:37:19.601Z",
+    "name": "Toshiba Administrativa",
+    "ip": "172.16.11.48",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 82%",
+      "magenta: 77%",
+      "cyan: 97%",
+      "black: 88%",
+      "Pages: 193726"
+    ]
+  },
+  "Toshiba Piso 5": {
+    "timestamp": "2026-04-08T16:37:38.983Z",
+    "name": "Toshiba Piso 5",
+    "ip": "172.16.11.215",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 34%",
+      "magenta: 60%",
+      "cyan: 62%",
+      "black: 63%",
+      "Pages: 253236"
+    ]
+  },
+  "Toshiba Piso 6": {
+    "timestamp": "2026-04-08T16:37:53.366Z",
+    "name": "Toshiba Piso 6",
+    "ip": "172.16.11.169",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 79%",
+      "magenta: 76%",
+      "cyan: 52%",
+      "black: 77%",
+      "Pages: 54461"
+    ]
+  },
+  "Financiera": {
+    "timestamp": "2026-04-08T16:32:44.785Z",
+    "name": "Financiera",
+    "ip": "172.16.11.41",
+    "status": "online",
+    "inkLevels": [
+      "Pages: 82177",
+      "BW Pages: 78971",
+      "Color Pages: 3103",
+      "cyan: 90%",
+      "magenta: 53%",
+      "yellow: 0%",
+      "black: 65%"
+    ]
+  }
+}
