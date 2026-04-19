@@ -102,6 +102,7 @@
         
         const InventoryDetailsPage = () => {
             const [printers, setPrinters] = useState([]);
+            const location = useLocation();
             const [loading, setLoading] = useState(true);
             const [showAuthModal, setShowAuthModal] = useState(false);
             const [authPrinter, setAuthPrinter] = useState(null);
@@ -906,10 +907,25 @@
             const [showAddModelModal, setShowAddModelModal] = useState(false);
             const [newModelName, setNewModelName] = useState('');
             const [isEditing, setIsEditing] = useState(false);
+            const [collapsedModels, setCollapsedModels] = useState({});
             const location = useLocation();
 
             const tipoItems = ["Botella de tinta", "Cabezal de Impresión", "Toner", "Cartucho", "Developer Unit", "Tambor"];
             const colorItems = ["TRICOLOR", "B&W", "CIAN", "YELLOW", "MAGENTA", "KEY"];
+
+            const toggleCollapse = (model) => {
+                setCollapsedModels(prev => ({ ...prev, [model]: !prev[model] }));
+            };
+
+            const collapseAll = () => {
+                const newCollapsed = {};
+                models.forEach(m => newCollapsed[m] = true);
+                setCollapsedModels(newCollapsed);
+            };
+
+            const expandAll = () => {
+                setCollapsedModels({});
+            };
 
             useEffect(() => {
                 Promise.all([
@@ -1009,18 +1025,20 @@
                                     <div className="size-8 flex items-center justify-center bg-primary/20 rounded-lg text-primary">
                                         <span className="material-symbols-outlined">inventory</span>
                                     </div>
-                                    <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Supply Manager</h2>
+                                    <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Enterprise Print Manager</h2>
                                 </div>
                                 <div className="hidden md:flex items-center gap-6">
                                     <Link className={`${location.pathname === '/' ? 'text-white border-b-2 border-primary pb-4 -mb-4' : 'text-gray-400 hover:text-white'} text-sm font-medium transition-colors`} to="/">Dashboard</Link>
-                                    <Link className={`${location.pathname === '/supplies' ? 'text-white border-b-2 border-primary pb-4 -mb-4' : 'text-gray-400 hover:text-white'} text-sm font-medium transition-colors`} to="/supplies">Inventario de Insumos</Link>
+                                    <Link className={`${location.pathname === '/supplies' ? 'text-white border-b-2 border-primary pb-4 -mb-4' : 'text-gray-400 hover:text-white'} text-sm font-medium transition-colors`} to="/supplies">Insumos</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-4 md:px-6 lg:px-8 py-6">
-                            <div>
+                        {/* Header Area */}
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                            <div className="flex flex-col gap-2">
                                 <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">Inventario de Insumos</h1>
                                 <p className="text-[#9da8b9] text-sm md:text-base">Gestión de stock agrupada por modelo de impresora</p>
                             </div>
@@ -1037,6 +1055,21 @@
                                     <span className="material-symbols-outlined" style={{fontSize: '22px'}}>add_circle</span>
                                     <span>Agregar Nueva Impresora</span>
                                 </button>
+                                <div className="h-10 w-px bg-border-dark mx-1"></div>
+                                <div className="flex bg-[#101822] border border-border-dark rounded-xl p-1 shadow-xl">
+                                    <button 
+                                        onClick={expandAll}
+                                        title="Expandir Todo"
+                                        className="size-10 flex items-center justify-center rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                                        <span className="material-symbols-outlined">unfold_more</span>
+                                    </button>
+                                    <button 
+                                        onClick={collapseAll}
+                                        title="Colapsar Todo"
+                                        className="size-10 flex items-center justify-center rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                                        <span className="material-symbols-outlined">unfold_less</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -1046,40 +1079,55 @@
                             <div className="space-y-10">
                                 {models.map(model => {
                                     const modelData = inventory[model] || { supplies: [], offices: "" };
+                                    const isCollapsed = collapsedModels[model];
                                     return (
                                         <div key={model} className="bg-surface-dark border border-border-dark rounded-xl overflow-hidden shadow-lg transition-all hover:border-gray-700">
-                                            <div className="bg-[#101822] px-6 py-4 border-b border-border-dark flex flex-col gap-4">
-                                                <div className="flex items-center justify-between">
+                                            <div className="bg-[#101822] border-b border-border-dark flex flex-col gap-4">
+                                                <div 
+                                                    onClick={() => toggleCollapse(model)}
+                                                    className="px-6 py-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-colors">
                                                     <div className="flex items-center gap-4">
-                                                        <h3 className="text-xl font-bold text-white uppercase tracking-wide">{model}</h3>
-                                                        <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">
+                                                        <span className={`material-symbols-outlined text-gray-500 transition-transform duration-200 ${isCollapsed ? '-rotate-90' : ''}`}>expand_more</span>
+                                                        <div className="flex flex-col">
+                                                            <h3 className="text-xl font-bold text-white uppercase tracking-wide leading-tight">{model}</h3>
+                                                            {modelData.offices && (
+                                                                <span className="text-sm text-text-secondary font-medium flex items-center gap-1 mt-0.5">
+                                                                    <span className="material-symbols-outlined text-[16px]">apartment</span>
+                                                                    {modelData.offices}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold h-fit">
                                                             {printers.filter(p => p.model === model).length} impresoras
                                                         </span>
                                                     </div>
                                                     <button 
                                                         disabled={!isEditing}
-                                                        onClick={() => handleAddRow(model)}
+                                                        onClick={(e) => { e.stopPropagation(); handleAddRow(model); }}
                                                         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg ${isEditing ? 'bg-primary hover:bg-blue-600 text-white shadow-primary/20' : 'bg-gray-700 text-gray-400 cursor-not-allowed opacity-50'}`}>
                                                         <span className="material-symbols-outlined" style={{fontSize: '18px'}}>add</span>
                                                         Agregar Insumo
                                                     </button>
                                                 </div>
                                                 
-                                                <div className="flex items-center gap-3">
-                                                    <span className="material-symbols-outlined text-gray-500 text-[20px]">apartment</span>
-                                                    <input 
-                                                        type="text" 
-                                                        disabled={!isEditing}
-                                                        className={`flex-1 bg-[#151e29] border border-border-dark rounded-lg px-4 py-2 text-sm text-gray-300 focus:ring-1 focus:ring-primary outline-none transition-all ${!isEditing ? 'bg-opacity-50 cursor-not-allowed border-transparent' : 'hover:border-gray-600'}`}
-                                                        placeholder="Nombre de las oficinas donde se encuentra este modelo..."
-                                                        value={modelData.offices}
-                                                        onChange={(e) => handleOfficeChange(model, e.target.value)}
-                                                        onBlur={() => handleBlur(model)}
-                                                    />
-                                                </div>
+                                                {!isCollapsed && (
+                                                    <div className="px-6 pb-4 flex items-center gap-3">
+                                                        <span className="material-symbols-outlined text-gray-500 text-[20px]">apartment</span>
+                                                        <input 
+                                                            type="text" 
+                                                            disabled={!isEditing}
+                                                            className={`flex-1 bg-[#151e29] border border-border-dark rounded-lg px-4 py-2 text-sm text-gray-300 focus:ring-1 focus:ring-primary outline-none transition-all ${!isEditing ? 'bg-opacity-50 cursor-not-allowed border-transparent' : 'hover:border-gray-600'}`}
+                                                            placeholder="Nombre de las oficinas donde se encuentra este modelo..."
+                                                            value={modelData.offices}
+                                                            onChange={(e) => handleOfficeChange(model, e.target.value)}
+                                                            onBlur={() => handleBlur(model)}
+                                                        />
+                                                    </div>
+                                                )}
                                             </div>
 
-                                            <div className="overflow-x-auto custom-scrollbar">
+                                            {!isCollapsed && (
+                                                <div className="overflow-x-auto custom-scrollbar">
                                                 <table className="w-full text-left border-collapse">
                                                     <thead>
                                                         <tr className="bg-surface-darker/50 text-[#9da8b9] text-[10px] uppercase tracking-widest font-bold">
@@ -1174,11 +1222,13 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            )}
                                         </div>
                                     );
                                 })}
                             </div>
                         )}
+                    </div>
                     {/* Add Model Modal */}
                     {showAddModelModal && (
                         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">

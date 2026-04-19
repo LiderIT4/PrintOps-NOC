@@ -1,219 +1,240 @@
 {
-  "cp2025": [
-    {
-      "type": "Toner",
-      "reference": "304a",
-      "color": "MAGENTA",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "304a",
-      "color": "CIAN",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "304a",
-      "color": "YELLOW",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "304a",
-      "color": "B&W",
-      "minStock": 2,
-      "currentStock": 1
-    }
-  ],
-  "hp4720": [
-    {
-      "type": "Cartucho",
-      "reference": "46 CZ637A",
-      "color": "B&W",
-      "minStock": 5,
-      "currentStock": 2
-    },
-    {
-      "type": "Cartucho",
-      "reference": "46 Color CZ638AL",
-      "color": "TRICOLOR",
-      "minStock": 5,
-      "currentStock": 2
-    }
-  ],
-  "hp477dw": [
-    {
-      "type": "Cartucho",
-      "reference": "XL HP 974X",
-      "color": "B&W",
-      "minStock": 5,
-      "currentStock": 2
-    },
-    {
-      "type": "Cartucho",
-      "reference": "HP 974X",
-      "color": "YELLOW",
-      "minStock": 5,
-      "currentStock": 2
-    },
-    {
-      "type": "Cartucho",
-      "reference": "HP 974X",
-      "color": "MAGENTA",
-      "minStock": 5,
-      "currentStock": 3
-    },
-    {
-      "type": "Cartucho",
-      "reference": "HP 974X",
-      "color": "CIAN",
-      "minStock": 5,
-      "currentStock": 2
-    }
-  ],
-  "hpSmartTank510": [
-    {
-      "type": "Botella de tinta",
-      "reference": "GT753 / GT53XL",
-      "color": "B&W",
-      "minStock": 2,
-      "currentStock": 1
-    },
-    {
-      "type": "Botella de tinta",
-      "reference": "G752",
-      "color": "CIAN",
-      "minStock": 2,
-      "currentStock": 5
-    },
-    {
-      "type": "Botella de tinta",
-      "reference": "G752",
-      "color": "YELLOW",
-      "minStock": 2,
-      "currentStock": 5
-    },
-    {
-      "type": "Botella de tinta",
-      "reference": "G752",
-      "color": "MAGENTA",
-      "minStock": 2,
-      "currentStock": 4
-    },
-    {
-      "type": "Cabezal de Impresión",
-      "reference": "GT M0H50A",
-      "color": "TRICOLOR",
-      "minStock": 2,
-      "currentStock": 2
-    },
-    {
-      "type": "Cabezal de Impresión",
-      "reference": "GT M0H51A",
-      "color": "B&W",
-      "minStock": 2,
-      "currentStock": 2
-    }
-  ],
-  "hp_m1212nf": [
-    {
-      "type": "Toner",
-      "reference": "78A",
-      "color": "B&W",
-      "minStock": 2,
-      "currentStock": 2
-    }
-  ],
-  "konica": [
-    {
-      "type": "Developer Unit",
-      "reference": "DV311K",
-      "color": "B&W",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Developer Unit",
-      "reference": "DV311M",
-      "color": "MAGENTA",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Developer Unit",
-      "reference": "DV311C",
-      "color": "CIAN",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Developer Unit",
-      "reference": "DV311Y",
-      "color": "YELLOW",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "TN216K",
-      "color": "B&W",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "TN216M",
-      "color": "MAGENTA",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "TN216C",
-      "color": "CIAN",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "TN216Y",
-      "color": "YELLOW",
-      "minStock": 1,
-      "currentStock": 1
-    }
-  ],
-  "toshiba": [
-    {
-      "type": "Toner",
-      "reference": "T-FC50UK",
-      "color": "B&W",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "T-FC50UM",
-      "color": "MAGENTA",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "T-FC50UC",
-      "color": "CIAN",
-      "minStock": 1,
-      "currentStock": 1
-    },
-    {
-      "type": "Toner",
-      "reference": "T-FC50UY",
-      "color": "YELLOW",
-      "minStock": 1,
-      "currentStock": 1
-    }
-  ]
+  "cp2025": {
+    "supplies": [
+      {
+        "type": "Toner",
+        "reference": "304a",
+        "color": "MAGENTA",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "304a",
+        "color": "CIAN",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "304a",
+        "color": "YELLOW",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "304a",
+        "color": "B&W",
+        "minStock": 2,
+        "currentStock": 1
+      }
+    ],
+    "offices": "Producción piso 3"
+  },
+  "hp4720": {
+    "supplies": [
+      {
+        "type": "Cartucho",
+        "reference": "46 CZ637A",
+        "color": "B&W",
+        "minStock": 5,
+        "currentStock": 2
+      },
+      {
+        "type": "Cartucho",
+        "reference": "46 Color CZ638AL",
+        "color": "TRICOLOR",
+        "minStock": 5,
+        "currentStock": 2
+      }
+    ],
+    "offices": ""
+  },
+  "hp477dw": {
+    "supplies": [
+      {
+        "type": "Cartucho",
+        "reference": "XL HP 974X",
+        "color": "B&W",
+        "minStock": 5,
+        "currentStock": 2
+      },
+      {
+        "type": "Cartucho",
+        "reference": "HP 974X",
+        "color": "YELLOW",
+        "minStock": 5,
+        "currentStock": 2
+      },
+      {
+        "type": "Cartucho",
+        "reference": "HP 974X",
+        "color": "MAGENTA",
+        "minStock": 5,
+        "currentStock": 3
+      },
+      {
+        "type": "Cartucho",
+        "reference": "HP 974X",
+        "color": "CIAN",
+        "minStock": 5,
+        "currentStock": 2
+      }
+    ],
+    "offices": ""
+  },
+  "hpSmartTank510": {
+    "supplies": [
+      {
+        "type": "Botella de tinta",
+        "reference": "GT753 / GT53XL",
+        "color": "B&W",
+        "minStock": 2,
+        "currentStock": 1
+      },
+      {
+        "type": "Botella de tinta",
+        "reference": "G752",
+        "color": "CIAN",
+        "minStock": 2,
+        "currentStock": 5
+      },
+      {
+        "type": "Botella de tinta",
+        "reference": "G752",
+        "color": "YELLOW",
+        "minStock": 2,
+        "currentStock": 5
+      },
+      {
+        "type": "Botella de tinta",
+        "reference": "G752",
+        "color": "MAGENTA",
+        "minStock": 2,
+        "currentStock": 4
+      },
+      {
+        "type": "Cabezal de Impresión",
+        "reference": "GT M0H50A",
+        "color": "TRICOLOR",
+        "minStock": 2,
+        "currentStock": 2
+      },
+      {
+        "type": "Cabezal de Impresión",
+        "reference": "GT M0H51A",
+        "color": "B&W",
+        "minStock": 2,
+        "currentStock": 2
+      }
+    ],
+    "offices": ""
+  },
+  "hp_m1212nf": {
+    "supplies": [
+      {
+        "type": "Toner",
+        "reference": "78A",
+        "color": "B&W",
+        "minStock": 2,
+        "currentStock": 2
+      }
+    ],
+    "offices": ""
+  },
+  "konica": {
+    "supplies": [
+      {
+        "type": "Developer Unit",
+        "reference": "DV311K",
+        "color": "B&W",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Developer Unit",
+        "reference": "DV311M",
+        "color": "MAGENTA",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Developer Unit",
+        "reference": "DV311C",
+        "color": "CIAN",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Developer Unit",
+        "reference": "DV311Y",
+        "color": "YELLOW",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "TN216K",
+        "color": "B&W",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "TN216M",
+        "color": "MAGENTA",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "TN216C",
+        "color": "CIAN",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "TN216Y",
+        "color": "YELLOW",
+        "minStock": 1,
+        "currentStock": 1
+      }
+    ],
+    "offices": ""
+  },
+  "toshiba": {
+    "supplies": [
+      {
+        "type": "Toner",
+        "reference": "T-FC50UK",
+        "color": "B&W",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "T-FC50UM",
+        "color": "MAGENTA",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "T-FC50UC",
+        "color": "CIAN",
+        "minStock": 1,
+        "currentStock": 1
+      },
+      {
+        "type": "Toner",
+        "reference": "T-FC50UY",
+        "color": "YELLOW",
+        "minStock": 1,
+        "currentStock": 1
+      }
+    ],
+    "offices": ""
+  }
 }
