@@ -209,7 +209,7 @@
       "currentStock": 1
     },
     {
-      "type": "Botella de tinta",
+      "type": "Toner",
       "reference": "T-FC50UY",
       "color": "YELLOW",
       "minStock": 1,

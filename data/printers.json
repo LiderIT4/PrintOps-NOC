@@ -131,7 +131,7 @@
     ]
   },
   "Cocina piso 7": {
-    "timestamp": "2026-04-19T13:46:59.965Z",
+    "timestamp": "2026-04-19T15:53:36.840Z",
     "name": "Cocina piso 7",
     "ip": "172.16.111.59",
     "status": "online",
@@ -207,6 +207,18 @@
       "magenta: 52%",
       "yellow: 98%",
       "black: 59%"
+    ]
+  },
+  "Fuente Encuentros Piso 7": {
+    "timestamp": "2026-04-19T15:55:09.257Z",
+    "name": "Fuente Encuentros Piso 7",
+    "ip": "172.16.111.59",
+    "status": "online",
+    "inkLevels": [
+      "yellow: 100%",
+      "magenta: 100%",
+      "cyan: 100%",
+      "black: 100%"
     ]
   }
 }
