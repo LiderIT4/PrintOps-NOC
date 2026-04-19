@@ -1,92 +1,92 @@
 {
   "Pastor": {
-    "timestamp": "2026-04-08T16:33:00.944Z",
+    "timestamp": "2026-04-19T15:10:26.334Z",
     "name": "Pastor",
     "ip": "172.16.11.231",
     "status": "online",
     "inkLevels": [
-      "cyan: 59%",
-      "magenta: 46%",
-      "yellow: 84%",
-      "black: 47%",
-      "Pages: 24921",
-      "BW Pages: 18961",
-      "Color Pages: 5905"
+      "cyan: 57%",
+      "magenta: 45%",
+      "yellow: 83%",
+      "black: 45%",
+      "Pages: 25116",
+      "BW Pages: 18985",
+      "Color Pages: 6076"
     ]
   },
   "SPP": {
-    "timestamp": "2026-04-08T16:32:34.275Z",
+    "timestamp": "2026-04-19T15:10:03.889Z",
     "name": "SPP",
     "ip": "172.16.111.2",
     "status": "online",
     "inkLevels": [
       "cyan: 0%",
       "magenta: 29%",
-      "yellow: 73%",
-      "black: 69%",
-      "Pages: 51681",
-      "BW Pages: 50521",
+      "yellow: 72%",
+      "black: 68%",
+      "Pages: 51797",
+      "BW Pages: 50637",
       "Color Pages: 1143"
     ]
   },
   "Mantenimiento": {
-    "timestamp": "2026-04-08T16:32:25.499Z",
+    "timestamp": "2026-04-19T15:09:53.733Z",
     "name": "Mantenimiento",
     "ip": "172.16.111.110",
     "status": "online",
     "inkLevels": [
-      "cyan: 35%",
-      "magenta: 22%",
-      "yellow: 32%",
-      "black: 96%",
-      "Pages: 60438",
-      "BW Pages: 54075",
-      "Color Pages: 6351"
+      "cyan: 29%",
+      "magenta: 16%",
+      "yellow: 24%",
+      "black: 85%",
+      "Pages: 61137",
+      "BW Pages: 54553",
+      "Color Pages: 6572"
     ]
   },
   "Cooperativa": {
-    "timestamp": "2026-04-08T16:33:09.906Z",
+    "timestamp": "2026-04-19T15:10:36.420Z",
     "name": "Cooperativa",
     "ip": "172.16.11.172",
     "status": "online",
     "inkLevels": [
-      "cyan: 74%",
-      "magenta: 67%",
-      "yellow: 93%",
-      "black: 35%",
-      "Pages: 82380",
-      "BW Pages: 69725",
+      "cyan: 73%",
+      "magenta: 66%",
+      "yellow: 92%",
+      "black: 32%",
+      "Pages: 82672",
+      "BW Pages: 70017",
       "Color Pages: 12651"
     ]
   },
   "Radio": {
-    "timestamp": "2026-04-08T16:02:57.074Z",
+    "timestamp": "2026-04-19T15:06:24.174Z",
     "name": "Radio",
     "ip": "172.16.117.127",
     "status": "online",
     "inkLevels": [
-      "color: 20%",
-      "black: 60%",
-      "Pages: 21667",
-      "BW Pages: 8025",
-      "Color Pages: 13642"
+      "color: 10%",
+      "black: 50%",
+      "Pages: 21824",
+      "BW Pages: 8083",
+      "Color Pages: 13741"
     ]
   },
   "Eventos Gerizim": {
-    "timestamp": "2026-04-08T16:31:48.566Z",
+    "timestamp": "2026-04-19T15:07:08.032Z",
     "name": "Eventos Gerizim",
     "ip": "172.16.111.127",
     "status": "online",
     "inkLevels": [
-      "color: 20%",
-      "black: 60%",
-      "Pages: 17428",
-      "BW Pages: 12449",
-      "Color Pages: 4979"
+      "color: 10%",
+      "black: 50%",
+      "Pages: 17535",
+      "BW Pages: 12525",
+      "Color Pages: 5010"
     ]
   },
   "Estudio Grabación": {
-    "timestamp": "2026-04-08T16:32:16.106Z",
+    "timestamp": "2026-04-19T15:09:42.310Z",
     "name": "Estudio Grabación",
     "ip": "172.16.17.40",
     "status": "online",
@@ -95,7 +95,7 @@
     ]
   },
   "Bodega Coffee": {
-    "timestamp": "2026-04-08T16:38:45.014Z",
+    "timestamp": "2026-04-18T22:09:21.395Z",
     "name": "Bodega Coffee",
     "ip": "172.16.113.14",
     "status": "online",
@@ -107,19 +107,19 @@
     ]
   },
   "Producción Piso 3": {
-    "timestamp": "2026-04-08T16:30:00.667Z",
+    "timestamp": "2026-04-19T15:05:58.816Z",
     "name": "Producción Piso 3",
     "ip": "172.16.17.5",
     "status": "online",
     "inkLevels": [
-      "yellow: 30%",
-      "magenta: 26%",
-      "cyan: 36%",
-      "black: 72%"
+      "yellow: 28%",
+      "magenta: 25%",
+      "cyan: 35%",
+      "black: 68%"
     ]
   },
   "Konica": {
-    "timestamp": "2026-04-08T16:37:03.049Z",
+    "timestamp": "2026-04-16T14:09:19.369Z",
     "name": "Konica",
     "ip": "172.16.17.45",
     "status": "online",
@@ -131,7 +131,7 @@
     ]
   },
   "Cocina piso 7": {
-    "timestamp": "2026-04-08T16:36:53.172Z",
+    "timestamp": "2026-04-19T13:46:59.965Z",
     "name": "Cocina piso 7",
     "ip": "172.16.111.59",
     "status": "online",
@@ -143,70 +143,70 @@
     ]
   },
   "Factura Electrónica": {
-    "timestamp": "2026-04-08T16:32:07.780Z",
+    "timestamp": "2026-04-19T15:09:33.675Z",
     "name": "Factura Electrónica",
     "ip": "172.16.111.25",
     "status": "online",
     "inkLevels": [
       "color: 40%",
       "black: 60%",
-      "Pages: 18440",
-      "BW Pages: 12057",
-      "Color Pages: 6383"
+      "Pages: 18443",
+      "BW Pages: 12059",
+      "Color Pages: 6384"
     ]
   },
   "Toshiba Administrativa": {
-    "timestamp": "2026-04-08T16:37:19.601Z",
+    "timestamp": "2026-04-19T15:11:05.491Z",
     "name": "Toshiba Administrativa",
     "ip": "172.16.11.48",
     "status": "online",
     "inkLevels": [
-      "yellow: 82%",
-      "magenta: 77%",
-      "cyan: 97%",
-      "black: 88%",
-      "Pages: 193726"
+      "yellow: 81%",
+      "magenta: 75%",
+      "cyan: 93%",
+      "black: 86%",
+      "Pages: 194657"
     ]
   },
   "Toshiba Piso 5": {
-    "timestamp": "2026-04-08T16:37:38.983Z",
+    "timestamp": "2026-04-19T15:11:23.797Z",
     "name": "Toshiba Piso 5",
     "ip": "172.16.11.215",
     "status": "online",
     "inkLevels": [
-      "yellow: 34%",
-      "magenta: 60%",
-      "cyan: 62%",
-      "black: 63%",
-      "Pages: 253236"
+      "yellow: 97%",
+      "magenta: 55%",
+      "cyan: 44%",
+      "black: 56%",
+      "Pages: 256074"
     ]
   },
   "Toshiba Piso 6": {
-    "timestamp": "2026-04-08T16:37:53.366Z",
+    "timestamp": "2026-04-19T15:11:42.797Z",
     "name": "Toshiba Piso 6",
     "ip": "172.16.11.169",
     "status": "online",
     "inkLevels": [
-      "yellow: 79%",
-      "magenta: 76%",
-      "cyan: 52%",
-      "black: 77%",
-      "Pages: 54461"
+      "yellow: 78%",
+      "magenta: 74%",
+      "cyan: 49%",
+      "black: 75%",
+      "Pages: 55911"
     ]
   },
   "Financiera": {
-    "timestamp": "2026-04-08T16:32:44.785Z",
+    "timestamp": "2026-04-19T15:10:13.746Z",
     "name": "Financiera",
     "ip": "172.16.11.41",
     "status": "online",
     "inkLevels": [
-      "Pages: 82177",
-      "BW Pages: 78971",
+      "Pages: 82609",
+      "BW Pages: 79403",
       "Color Pages: 3103",
-      "cyan: 90%",
-      "magenta: 53%",
-      "yellow: 0%",
-      "black: 65%"
+      "cyan: 89%",
+      "magenta: 52%",
+      "yellow: 98%",
+      "black: 59%"
     ]
   }
 }

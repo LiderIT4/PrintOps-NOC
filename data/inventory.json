@@ -118,5 +118,102 @@
       "minStock": 2,
       "currentStock": 2
     }
+  ],
+  "hp_m1212nf": [
+    {
+      "type": "Toner",
+      "reference": "78A",
+      "color": "B&W",
+      "minStock": 2,
+      "currentStock": 2
+    }
+  ],
+  "konica": [
+    {
+      "type": "Developer Unit",
+      "reference": "DV311K",
+      "color": "B&W",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Developer Unit",
+      "reference": "DV311M",
+      "color": "MAGENTA",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Developer Unit",
+      "reference": "DV311C",
+      "color": "CIAN",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Developer Unit",
+      "reference": "DV311Y",
+      "color": "YELLOW",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Toner",
+      "reference": "TN216K",
+      "color": "B&W",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Toner",
+      "reference": "TN216M",
+      "color": "MAGENTA",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Toner",
+      "reference": "TN216C",
+      "color": "CIAN",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Toner",
+      "reference": "TN216Y",
+      "color": "YELLOW",
+      "minStock": 1,
+      "currentStock": 1
+    }
+  ],
+  "toshiba": [
+    {
+      "type": "Toner",
+      "reference": "T-FC50UK",
+      "color": "B&W",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Toner",
+      "reference": "T-FC50UM",
+      "color": "MAGENTA",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Toner",
+      "reference": "T-FC50UC",
+      "color": "CIAN",
+      "minStock": 1,
+      "currentStock": 1
+    },
+    {
+      "type": "Botella de tinta",
+      "reference": "T-FC50UY",
+      "color": "YELLOW",
+      "minStock": 1,
+      "currentStock": 1
+    }
   ]
 }
