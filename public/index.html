@@ -903,6 +903,9 @@
             const [printers, setPrinters] = useState([]);
             const [inventory, setInventory] = useState({});
             const [loading, setLoading] = useState(true);
+            const [showAddModelModal, setShowAddModelModal] = useState(false);
+            const [newModelName, setNewModelName] = useState('');
+            const [isEditing, setIsEditing] = useState(false);
             const location = useLocation();
 
             const tipoItems = ["Botella de tinta", "Cabezal de Impresión", "Toner", "Cartucho", "Developer Unit", "Tambor"];
@@ -919,48 +922,80 @@
                 });
             }, []);
 
-            const models = [...new Set(printers.map(p => p.model))].sort();
+            const models = [...new Set([...printers.map(p => p.model), ...Object.keys(inventory)])].sort();
+
+            const handleAddModel = () => {
+                const model = newModelName.trim();
+                if (!model) return;
+                
+                if (inventory[model]) {
+                    setShowAddModelModal(false);
+                    setNewModelName('');
+                    return;
+                }
+
+                const defaultSupplies = [
+                    { type: tipoItems[2], reference: "", color: colorItems[1], minStock: 1, currentStock: 1 }
+                ];
+                
+                const updatedInv = { ...inventory, [model]: { supplies: defaultSupplies, offices: "" } };
+                setInventory(updatedInv);
+                saveInventory(model, defaultSupplies, "");
+                setShowAddModelModal(false);
+                setNewModelName('');
+            };
 
             const handleAddRow = (model) => {
+                const modelData = inventory[model] || { supplies: [], offices: "" };
                 const newRow = { type: tipoItems[0], reference: "", color: colorItems[1], minStock: 1, currentStock: 1 };
-                const updatedSupplies = [...(inventory[model] || []), newRow];
-                const updatedInv = { ...inventory, [model]: updatedSupplies };
+                const updatedSupplies = [...modelData.supplies, newRow];
+                const updatedInv = { ...inventory, [model]: { ...modelData, supplies: updatedSupplies } };
                 setInventory(updatedInv);
-                saveInventory(model, updatedSupplies);
+                saveInventory(model, updatedSupplies, modelData.offices);
             };
 
             const handleRemoveRow = (model, index) => {
-                const updatedSupplies = inventory[model].filter((_, i) => i !== index);
-                const updatedInv = { ...inventory, [model]: updatedSupplies };
+                const modelData = inventory[model];
+                const updatedSupplies = modelData.supplies.filter((_, i) => i !== index);
+                const updatedInv = { ...inventory, [model]: { ...modelData, supplies: updatedSupplies } };
                 setInventory(updatedInv);
-                saveInventory(model, updatedSupplies);
+                saveInventory(model, updatedSupplies, modelData.offices);
             };
 
             const handleChange = (model, index, field, value) => {
-                const updatedSupplies = [...(inventory[model] || [])];
+                const modelData = inventory[model];
+                const updatedSupplies = [...modelData.supplies];
                 updatedSupplies[index] = { ...updatedSupplies[index], [field]: value };
-                const updatedInv = { ...inventory, [model]: updatedSupplies };
+                const updatedInv = { ...inventory, [model]: { ...modelData, supplies: updatedSupplies } };
+                setInventory(updatedInv);
+            };
+
+            const handleOfficeChange = (model, value) => {
+                const modelData = inventory[model] || { supplies: [], offices: "" };
+                const updatedInv = { ...inventory, [model]: { ...modelData, offices: value } };
                 setInventory(updatedInv);
             };
 
             const handleBlur = (model) => {
-                saveInventory(model, inventory[model]);
+                const modelData = inventory[model];
+                saveInventory(model, modelData.supplies, modelData.offices);
             };
 
             const adjustStock = (model, index, delta) => {
-                const updatedSupplies = [...(inventory[model] || [])];
+                const modelData = inventory[model];
+                const updatedSupplies = [...modelData.supplies];
                 const newStock = (updatedSupplies[index].currentStock || 0) + delta;
                 updatedSupplies[index] = { ...updatedSupplies[index], currentStock: Math.max(0, newStock) };
-                const updatedInv = { ...inventory, [model]: updatedSupplies };
+                const updatedInv = { ...inventory, [model]: { ...modelData, supplies: updatedSupplies } };
                 setInventory(updatedInv);
-                saveInventory(model, updatedSupplies);
+                saveInventory(model, updatedSupplies, modelData.offices);
             };
 
-            const saveInventory = (model, supplies) => {
+            const saveInventory = (model, supplies, offices) => {
                 fetch('/api/inventory/save', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ model, supplies })
+                    body: JSON.stringify({ model, supplies, offices })
                 });
             };
 
@@ -985,127 +1020,205 @@
                     </div>
 
                     <div className="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-4 md:px-6 lg:px-8 py-6">
-                        <div className="mb-8">
-                            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">Inventario de Insumos</h1>
-                            <p className="text-[#9da8b9] text-sm md:text-base">Gestión de stock agrupada por modelo de impresora</p>
+                            <div>
+                                <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">Inventario de Insumos</h1>
+                                <p className="text-[#9da8b9] text-sm md:text-base">Gestión de stock agrupada por modelo de impresora</p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <button 
+                                    onClick={() => setIsEditing(!isEditing)}
+                                    className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all border shadow-xl ${isEditing ? 'bg-amber-500 hover:bg-amber-600 text-white border-amber-600' : 'bg-primary hover:bg-blue-600 text-white border-primary'}`}>
+                                    <span className="material-symbols-outlined" style={{fontSize: '22px'}}>{isEditing ? 'lock_open' : 'edit'}</span>
+                                    <span>{isEditing ? 'Guardar Cambios' : 'Modo Edición'}</span>
+                                </button>
+                                <button 
+                                    onClick={() => setShowAddModelModal(true)}
+                                    className="flex items-center gap-2 bg-[#2d3748] hover:bg-[#3b4554] text-white px-6 py-3 rounded-xl text-sm font-bold transition-all border border-[#4a5568] shadow-xl hover:scale-[1.02] active:scale-[0.98]">
+                                    <span className="material-symbols-outlined" style={{fontSize: '22px'}}>add_circle</span>
+                                    <span>Agregar Nueva Impresora</span>
+                                </button>
+                            </div>
                         </div>
 
                         {loading ? (
                             <div className="flex justify-center p-20"><p className="text-gray-500 animate-pulse">Cargando inventario...</p></div>
                         ) : (
                             <div className="space-y-10">
-                                {models.map(model => (
-                                    <div key={model} className="bg-surface-dark border border-border-dark rounded-xl overflow-hidden shadow-lg transition-all hover:border-gray-700">
-                                        <div className="bg-[#101822] px-6 py-4 border-b border-border-dark flex items-center justify-between">
-                                            <div className="flex items-center gap-4">
-                                                <h3 className="text-xl font-bold text-white uppercase tracking-wide">{model}</h3>
-                                                <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">
-                                                    {printers.filter(p => p.model === model).length} impresoras
-                                                </span>
+                                {models.map(model => {
+                                    const modelData = inventory[model] || { supplies: [], offices: "" };
+                                    return (
+                                        <div key={model} className="bg-surface-dark border border-border-dark rounded-xl overflow-hidden shadow-lg transition-all hover:border-gray-700">
+                                            <div className="bg-[#101822] px-6 py-4 border-b border-border-dark flex flex-col gap-4">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex items-center gap-4">
+                                                        <h3 className="text-xl font-bold text-white uppercase tracking-wide">{model}</h3>
+                                                        <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">
+                                                            {printers.filter(p => p.model === model).length} impresoras
+                                                        </span>
+                                                    </div>
+                                                    <button 
+                                                        disabled={!isEditing}
+                                                        onClick={() => handleAddRow(model)}
+                                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg ${isEditing ? 'bg-primary hover:bg-blue-600 text-white shadow-primary/20' : 'bg-gray-700 text-gray-400 cursor-not-allowed opacity-50'}`}>
+                                                        <span className="material-symbols-outlined" style={{fontSize: '18px'}}>add</span>
+                                                        Agregar Insumo
+                                                    </button>
+                                                </div>
+                                                
+                                                <div className="flex items-center gap-3">
+                                                    <span className="material-symbols-outlined text-gray-500 text-[20px]">apartment</span>
+                                                    <input 
+                                                        type="text" 
+                                                        disabled={!isEditing}
+                                                        className={`flex-1 bg-[#151e29] border border-border-dark rounded-lg px-4 py-2 text-sm text-gray-300 focus:ring-1 focus:ring-primary outline-none transition-all ${!isEditing ? 'bg-opacity-50 cursor-not-allowed border-transparent' : 'hover:border-gray-600'}`}
+                                                        placeholder="Nombre de las oficinas donde se encuentra este modelo..."
+                                                        value={modelData.offices}
+                                                        onChange={(e) => handleOfficeChange(model, e.target.value)}
+                                                        onBlur={() => handleBlur(model)}
+                                                    />
+                                                </div>
                                             </div>
-                                            <button 
-                                                onClick={() => handleAddRow(model)}
-                                                className="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-lg shadow-primary/20">
-                                                <span className="material-symbols-outlined" style={{fontSize: '18px'}}>add</span>
-                                                Agregar Insumo
-                                            </button>
-                                        </div>
 
-                                        <div className="overflow-x-auto custom-scrollbar">
-                                            <table className="w-full text-left border-collapse">
-                                                <thead>
-                                                    <tr className="bg-surface-darker/50 text-[#9da8b9] text-[10px] uppercase tracking-widest font-bold">
-                                                        <th className="px-6 py-3 border-b border-border-dark">Tipo de Insumo</th>
-                                                        <th className="px-6 py-3 border-b border-border-dark">Referencia</th>
-                                                        <th className="px-6 py-3 border-b border-border-dark">Color</th>
-                                                        <th className="px-6 py-3 border-b border-border-dark w-32">Stock Mínimo</th>
-                                                        <th className="px-6 py-3 border-b border-border-dark w-40">Stock Actual</th>
-                                                        <th className="px-6 py-3 border-b border-border-dark text-right">Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="divide-y divide-border-dark">
-                                                    {(inventory[model] || []).map((item, idx) => (
-                                                        <tr key={idx} className="hover:bg-white/5 transition-colors group">
-                                                            <td className="px-6 py-4">
-                                                                <select 
-                                                                    className="bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-full focus:ring-1 focus:ring-primary"
-                                                                    value={item.type}
-                                                                    onChange={(e) => handleChange(model, idx, 'type', e.target.value)}
-                                                                    onBlur={() => handleBlur(model)}
-                                                                >
-                                                                    {tipoItems.map(t => <option key={t} value={t}>{t}</option>)}
-                                                                </select>
-                                                            </td>
-                                                            <td className="px-6 py-4">
-                                                                <input 
-                                                                    type="text" 
-                                                                    className="bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-full focus:ring-1 focus:ring-primary"
-                                                                    value={item.reference}
-                                                                    placeholder="Ej: CF258A"
-                                                                    onChange={(e) => handleChange(model, idx, 'reference', e.target.value)}
-                                                                    onBlur={() => handleBlur(model)}
-                                                                />
-                                                            </td>
-                                                            <td className="px-6 py-4">
-                                                                <select 
-                                                                    className="bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-full focus:ring-1 focus:ring-primary"
-                                                                    value={item.color}
-                                                                    onChange={(e) => handleChange(model, idx, 'color', e.target.value)}
-                                                                    onBlur={() => handleBlur(model)}
-                                                                >
-                                                                    {colorItems.map(c => <option key={c} value={c}>{c}</option>)}
-                                                                </select>
-                                                            </td>
-                                                            <td className="px-6 py-4">
-                                                                <input 
-                                                                    type="number" 
-                                                                    className="bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-20 focus:ring-1 focus:ring-primary"
-                                                                    value={item.minStock}
-                                                                    onChange={(e) => handleChange(model, idx, 'minStock', parseInt(e.target.value) || 0)}
-                                                                    onBlur={() => handleBlur(model)}
-                                                                />
-                                                            </td>
-                                                            <td className="px-6 py-4">
-                                                                <div className="flex items-center gap-2">
-                                                                    <button 
-                                                                        onClick={() => adjustStock(model, idx, -1)}
-                                                                        className="size-8 flex items-center justify-center rounded-md bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors">
-                                                                        <span className="material-symbols-outlined" style={{fontSize: '18px'}}>remove</span>
-                                                                    </button>
-                                                                    <span className={`text-sm font-bold w-8 text-center ${item.currentStock <= item.minStock ? 'text-red-500 animate-pulse' : 'text-white'}`}>
-                                                                        {item.currentStock}
-                                                                    </span>
-                                                                    <button 
-                                                                        onClick={() => adjustStock(model, idx, 1)}
-                                                                        className="size-8 flex items-center justify-center rounded-md bg-green-500/10 text-green-500 hover:bg-green-500/20 transition-colors">
-                                                                        <span className="material-symbols-outlined" style={{fontSize: '18px'}}>add</span>
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                            <td className="px-6 py-4 text-right">
-                                                                <button 
-                                                                    onClick={() => handleRemoveRow(model, idx)}
-                                                                    className="text-gray-500 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
-                                                                    <span className="material-symbols-outlined" style={{fontSize: '20px'}}>delete</span>
-                                                                </button>
-                                                            </td>
+                                            <div className="overflow-x-auto custom-scrollbar">
+                                                <table className="w-full text-left border-collapse">
+                                                    <thead>
+                                                        <tr className="bg-surface-darker/50 text-[#9da8b9] text-[10px] uppercase tracking-widest font-bold">
+                                                            <th className="px-6 py-3 border-b border-border-dark">Tipo de Insumo</th>
+                                                            <th className="px-6 py-3 border-b border-border-dark">Referencia</th>
+                                                            <th className="px-6 py-3 border-b border-border-dark">Color</th>
+                                                            <th className="px-6 py-3 border-b border-border-dark w-32">Stock Mínimo</th>
+                                                            <th className="px-6 py-3 border-b border-border-dark w-40">Stock Actual</th>
+                                                            <th className="px-6 py-3 border-b border-border-dark text-right">Acciones</th>
                                                         </tr>
-                                                    ))}
-                                                    {(inventory[model] || []).length === 0 && (
-                                                        <tr>
-                                                            <td colSpan="6" className="px-6 py-10 text-center text-gray-500 italic text-sm">
-                                                                No hay insumos registrados para este modelo. Haga clic en "Agregar Insumo" para empezar.
-                                                            </td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-border-dark">
+                                                        {modelData.supplies.map((item, idx) => (
+                                                            <tr key={idx} className="hover:bg-white/5 transition-colors group">
+                                                                <td className="px-6 py-4">
+                                                                    <select 
+                                                                        disabled={!isEditing}
+                                                                        className={`bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-full focus:ring-1 focus:ring-primary ${!isEditing ? 'appearance-none bg-transparent border-transparent cursor-default' : ''}`}
+                                                                        value={item.type}
+                                                                        onChange={(e) => handleChange(model, idx, 'type', e.target.value)}
+                                                                        onBlur={() => handleBlur(model)}
+                                                                    >
+                                                                        {tipoItems.map(t => <option key={t} value={t}>{t}</option>)}
+                                                                    </select>
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <input 
+                                                                        type="text" 
+                                                                        disabled={!isEditing}
+                                                                        className={`bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-full focus:ring-1 focus:ring-primary ${!isEditing ? 'bg-transparent border-transparent cursor-default' : ''}`}
+                                                                        value={item.reference}
+                                                                        placeholder="Ej: CF258A"
+                                                                        onChange={(e) => handleChange(model, idx, 'reference', e.target.value)}
+                                                                        onBlur={() => handleBlur(model)}
+                                                                    />
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <select 
+                                                                        disabled={!isEditing}
+                                                                        className={`bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-full focus:ring-1 focus:ring-primary ${!isEditing ? 'appearance-none bg-transparent border-transparent cursor-default' : ''}`}
+                                                                        value={item.color}
+                                                                        onChange={(e) => handleChange(model, idx, 'color', e.target.value)}
+                                                                        onBlur={() => handleBlur(model)}
+                                                                    >
+                                                                        {colorItems.map(c => <option key={c} value={c}>{c}</option>)}
+                                                                    </select>
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <input 
+                                                                        type="number" 
+                                                                        disabled={!isEditing}
+                                                                        className={`bg-[#101822] border-border-dark text-gray-200 text-sm rounded-md w-20 focus:ring-1 focus:ring-primary ${!isEditing ? 'bg-transparent border-transparent cursor-default' : ''}`}
+                                                                        value={item.minStock}
+                                                                        onChange={(e) => handleChange(model, idx, 'minStock', parseInt(e.target.value) || 0)}
+                                                                        onBlur={() => handleBlur(model)}
+                                                                    />
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <button 
+                                                                            onClick={() => adjustStock(model, idx, -1)}
+                                                                            className="size-8 flex items-center justify-center rounded-md bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors">
+                                                                            <span className="material-symbols-outlined" style={{fontSize: '18px'}}>remove</span>
+                                                                        </button>
+                                                                        <span className={`text-sm font-bold w-8 text-center ${item.currentStock <= item.minStock ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+                                                                            {item.currentStock}
+                                                                        </span>
+                                                                        <button 
+                                                                            onClick={() => adjustStock(model, idx, 1)}
+                                                                            className="size-8 flex items-center justify-center rounded-md bg-green-500/10 text-green-500 hover:bg-green-500/20 transition-colors">
+                                                                            <span className="material-symbols-outlined" style={{fontSize: '18px'}}>add</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="px-6 py-4 text-right">
+                                                                    <button 
+                                                                        disabled={!isEditing}
+                                                                        onClick={() => handleRemoveRow(model, idx)}
+                                                                        className={`transition-colors opacity-0 group-hover:opacity-100 ${isEditing ? 'text-gray-500 hover:text-red-500' : 'text-gray-700 cursor-not-allowed'}`}>
+                                                                        <span className="material-symbols-outlined" style={{fontSize: '20px'}}>delete</span>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                        {modelData.supplies.length === 0 && (
+                                                            <tr>
+                                                                <td colSpan="6" className="px-6 py-10 text-center text-gray-500 italic text-sm">
+                                                                    No hay insumos registrados para este modelo. Haga clic en "Agregar Insumo" para empezar.
+                                                                </td>
+                                                            </tr>
+                                                        )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         )}
-                    </div>
+                    {/* Add Model Modal */}
+                    {showAddModelModal && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+                            <div className="bg-surface-dark border border-border-dark w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+                                <div className="p-6 border-b border-border-dark">
+                                    <div className="flex items-center gap-3 text-white mb-1">
+                                        <span className="material-symbols-outlined text-primary">add_circle</span>
+                                        <h3 className="text-xl font-bold tracking-tight">Agregar Nueva Impresora</h3>
+                                    </div>
+                                    <p className="text-gray-400 text-sm">Ingrese el nombre del modelo para agrupar sus insumos</p>
+                                </div>
+                                <div className="p-6 space-y-4">
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Nombre del Modelo</label>
+                                        <input 
+                                            type="text" 
+                                            className="w-full bg-[#101822] border border-border-dark rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
+                                            placeholder="Ej: HP LaserJet 404n"
+                                            value={newModelName}
+                                            onChange={(e) => setNewModelName(e.target.value)}
+                                            onKeyDown={(e) => e.key === 'Enter' && handleAddModel()}
+                                            autoFocus
+                                        />
+                                    </div>
+                                </div>
+                                <div className="p-6 bg-[#101822]/50 flex gap-3 justify-end">
+                                    <button 
+                                        onClick={() => setShowAddModelModal(false)}
+                                        className="px-4 py-2 text-sm font-bold text-gray-400 hover:text-white transition-colors">
+                                        Cancelar
+                                    </button>
+                                    <button 
+                                        onClick={() => handleAddModel()}
+                                        className="px-6 py-2 bg-primary hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 transition-all">
+                                        Crear Grupo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         };
